@@ -2,7 +2,7 @@ const boy = require("./boy.json");
 const girl = require("./girl.json");
 const lastname = require("./lastname.json");
 
-const nameLength = (boy.length + girl.length) * lastname.length;
+const nameLength = (boy.length + girl.length) * lastname.length * (360 * 7);
 
 let random = (max) => Math.round((max * Math.random()));
 
@@ -15,10 +15,12 @@ class Kid{
 		}else{ //girl
 			this.firstname = girl[Math.trunc(seed/2) % girl.length];
 		}
-		this.lastname = lastname[Math.trunc(seed) % lastname.length][0];
+		this.lastname = lastname[seed % lastname.length][0];
 		this.name = this.lastname + this.firstname;
+
+		this.birth = new Date(1103932800000 + (1000 * 60 * 60 * 24 * (seed % (360 * 7)) ));
 	}
 }
 
-var a = random(nameLength);
-console.log(new Kid(a).name, a);
+var a = new Kid(random(nameLength));
+console.log(a);
