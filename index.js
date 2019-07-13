@@ -20,7 +20,7 @@ class Kid{
 		this.lastname = lastname[seed % lastname.length][0];
 		this.name = this.lastname + this.firstname;
 
-		this.birth = new Date(1103932800000 + (1000 * 60 * 60 * 24 * (seed % (360 * 7)) ));
+		this.birth = new Date(1103932800000 + day * (seed % (360 * 7)) );
 	}
 }
 
