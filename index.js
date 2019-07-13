@@ -4,6 +4,8 @@ const lastname = require("./lastname.json");
 
 const nameLength = (boy.length + girl.length) * lastname.length * (360 * 7);
 
+const day = 1000 * 60 * 60 * 24;
+
 let random = (max) => Math.round((max * Math.random()));
 
 class Kid{
