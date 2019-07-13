@@ -23,7 +23,7 @@ let random = (max) => Math.round((max * Math.random()));
 class Kid{
 	constructor(seed){
 		this.seed = seed;
-		this.gender = seed % 2
+		this.gender = seed % 2;
 		if(!this.gender){ //boy
 			this.firstname = boy[Math.trunc(seed/2) % boy.length];
 		}else{ //girl
