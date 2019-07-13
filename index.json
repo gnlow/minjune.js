@@ -1,6 +1,6 @@
-const boy = require("./boy.json");
-const girl = require("./girl.json");
-const lastname = require("./lastname.json");
+const boy = require("./boy.js");
+const girl = require("./girl.js");
+const lastname = require("./lastname.js");
 
 const nameLength = (boy.length + girl.length) * lastname.length;
 
