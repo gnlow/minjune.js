@@ -50,16 +50,16 @@ class Key{
 		this.seed = seedTemp;
 	}
 	getSwits(ranges){
-		var sortedRanges = ranges.map((range, index) => ({range, index}))
+		var sortedRanges = ranges.map((range, index) => ({range: BigInt(range), index}))
 			.sort((a,b) => a.range==b.range?0:(a.range>b.range?1:-1));
 		var switSize = 1n;
 		var out = sortedRanges.map(obj => {
 			obj.swit =(this.seed/switSize)%obj.range;
 			switSize *= obj.range;
-			return new Swit(obj.swit, obj.range);
+			return Object.assign(new Swit(obj.swit, obj.range), {index: obj.index});
 		});
 		return out.sort((a,b) => a.index==b.index?0:(a.index>b.index?1:-1))
-			.map(obj => obj.swit);
+		.map(obj => {delete obj.index;return obj});
 	}
 }
 
@@ -87,4 +87,5 @@ var a = new Kid(random(nameLength));
 var b = Swit.randomize(5);
 var c = Swit.randomize(3);
 var d = Swit.randomize(2);
-console.log(new Key(...Swit.randByRanges(nameRange)));
+var seed = new Key(...Swit.randByRanges(nameRange));
+console.log(seed.getSwits(nameRange));
