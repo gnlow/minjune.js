@@ -18,7 +18,41 @@ const grades = [
 	{school: "ms", grade: 3},
 ];
 
-let random = (max) => Math.round((max * Math.random()));
+let random = (max) => Math.trunc((max * Math.random()));
+
+class Swit{
+	constructor(value, range){
+		this.range = BigInt(range);
+		this.value = BigInt(value) % this.range; //0~this.range
+	}
+	static randomize(range){
+		return new Swit(random(range), range);
+	}
+}
+
+class Key{
+	constructor(...swit){
+		this.swits = [...swit];
+		var switSize = 1n;
+		var seedTemp = 0n;
+		this.swits.map((data, index) => Object.assign(data, {index})).sort((a,b) => a.range==b.range?0:(a.range>b.range?1:-1)).forEach(obj => {
+			seedTemp += obj.value * switSize;
+			switSize *= obj.range;
+		});
+		this.swits.sort((a,b) => a.index==b.index?0:(a.index>b.index?1:-1)).map(obj => delete obj.index);
+		this.seed = seedTemp;
+	}
+	getSwits(ranges){
+		var sortedRanges = ranges.map((range, index) => ({range, index})).sort((a,b) => a.range==b.range?0:(a.range>b.range?1:-1));
+		var switSize = 1n;
+		var out = sortedRanges.map(obj => {
+			obj.swit =(this.seed/switSize)%obj.range;
+			switSize *= obj.range;
+			return new Swit(obj.swit, obj.range);
+		});
+		return out.sort((a,b) => a.index==b.index?0:(a.index>b.index?1:-1)).map(obj => obj.swit);
+	}
+}
 
 class Kid{
 	constructor(seed){
@@ -40,4 +74,9 @@ class Kid{
 }
 
 var a = new Kid(random(nameLength));
-console.log(a);
+
+var b = Swit.randomize(5);
+var c = Swit.randomize(3);
+var d = Swit.randomize(2);
+console.log(b, c, d);
+console.log(new Key(b, c, d));
