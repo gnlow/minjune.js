@@ -8,15 +8,15 @@ const nameRange = [boy.length + girl.length, lastname.length, 360 * 7];
 const day = 1000 * 60 * 60 * 24;
 
 const grades = [
-	{school: "es", grade: 1},
-	{school: "es", grade: 2},
-	{school: "es", grade: 3},
-	{school: "es", grade: 4},
-	{school: "es", grade: 5},
-	{school: "es", grade: 6},
-	{school: "ms", grade: 1},
-	{school: "ms", grade: 2},
-	{school: "ms", grade: 3},
+{school: "es", grade: 1},
+{school: "es", grade: 2},
+{school: "es", grade: 3},
+{school: "es", grade: 4},
+{school: "es", grade: 5},
+{school: "es", grade: 6},
+{school: "ms", grade: 1},
+{school: "ms", grade: 2},
+{school: "ms", grade: 3},
 ];
 
 let random = (max) => Math.trunc((max * Math.random())); //Generate random integer
@@ -40,8 +40,8 @@ class Key{
 		var switSize = 1n;
 		var seedTemp = 0n;
 		this.swits.map((data, index) => Object.assign(data, {index})) //Add index to keep order
-			.sort((a,b) => a.range==b.range?0:(a.range>b.range?1:-1)) //Sort by range
-			.forEach(obj => {
+		.sort((a,b) => a.range==b.range?0:(a.range>b.range?1:-1)) //Sort by range
+		.forEach(obj => {
 			seedTemp += obj.value * switSize;
 			switSize *= obj.range;
 		});
@@ -51,7 +51,7 @@ class Key{
 	}
 	getSwits(ranges){
 		var sortedRanges = ranges.map((range, index) => ({range: BigInt(range), index}))
-			.sort((a,b) => a.range==b.range?0:(a.range>b.range?1:-1));
+		.sort((a,b) => a.range==b.range?0:(a.range>b.range?1:-1));
 		var switSize = 1n;
 		var out = sortedRanges.map(obj => {
 			obj.swit =(this.seed/switSize)%obj.range;
