@@ -1,11 +1,23 @@
 {
   "name": "minjune.js",
   "version": "1.0.0",
-  "description": "",
+  "description": "minjune.js\r ==========\r minjune.js is JavaScript library for generating random profile.  \r ## Work in progress...",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": ""
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EntryDark/minjune.js.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EntryDark/minjune.js/issues"
+  },
+  "homepage": "https://github.com/EntryDark/minjune.js#readme",
+  "devDependencies": {
+    "eslint": "^6.1.0"
+  }
 }
