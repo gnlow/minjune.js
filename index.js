@@ -3,6 +3,7 @@ const girl = require("./girl.json");
 const lastname = require("./lastname.json");
 
 const nameLength = (boy.length + girl.length) * lastname.length * (360 * 7);
+const nameRange = [boy.length + girl.length, lastname.length, 360 * 7];
 
 const day = 1000 * 60 * 60 * 24;
 
@@ -27,6 +28,9 @@ class Swit{
 	}
 	static randomize(range){
 		return new Swit(random(range), range); //Generate random Swit in range
+	}
+	static randByRanges(ranges){
+		return ranges.map(range => Swit.randomize(range));
 	}
 }
 
@@ -83,5 +87,4 @@ var a = new Kid(random(nameLength));
 var b = Swit.randomize(5);
 var c = Swit.randomize(3);
 var d = Swit.randomize(2);
-console.log(b, c, d);
-console.log(new Key(b, c, d));
+console.log(new Key(...Swit.randByRanges(nameRange)));
