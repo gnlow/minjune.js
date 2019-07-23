@@ -61,31 +61,31 @@ class Key{
 		return out.sort((a,b) => a.index==b.index?0:(a.index>b.index?1:-1))
 		.map(obj => {delete obj.index;return obj});
 	}
+	in(range, ranges){
+		return Number(this.getSwits(ranges).find(swit => swit.range == BigInt(range)).value);
+	}
 }
 
 class Kid{
 	constructor(seed){
 		this.seed = seed;
-		this.gender = seed % 2;
-		if(!this.gender){ //boy
-			this.firstname = boy[Math.trunc(seed/2) % boy.length];
-		}else{ //girl
-			this.firstname = girl[Math.trunc(seed/2) % girl.length];
+		this.gender = (this.seed.in(boy.length + girl.length, nameRange) < boy.length)?"boy":"girl";
+		if(this.gender == "boy"){ //boy
+			this.firstname = boy[this.seed.in(boy.length + girl.length, nameRange)];
+		}else if(this.gender == "girl"){ //girl
+			this.firstname = girl[this.seed.in(boy.length + girl.length, nameRange) - boy.length - 1];
 		}
-		this.lastname = lastname[seed % lastname.length][0];
+		console.log(this.seed.in(lastname.length, nameRange))
+		this.lastname = lastname[this.seed.in(lastname.length, nameRange)][0];
 		this.name = this.lastname + this.firstname;
 
-		this.birth = new Date(1103932800000 + day * (seed % (360 * 7)) );
+		this.birth = new Date(1103932800000 + day * (this.seed.in(360 * 7, nameRange)) );
 		var today = new Date();
 		this.age = today.getYear() - this.birth.getYear() + 1;
 		this.grade = grades[this.age-8];
 	}
 }
 
-var a = new Kid(random(nameLength));
-
-var b = Swit.randomize(5);
-var c = Swit.randomize(3);
-var d = Swit.randomize(2);
 var seed = new Key(...Swit.randByRanges(nameRange));
-console.log(seed.getSwits(nameRange));
+var a = new Kid(seed);
+console.log(a);
