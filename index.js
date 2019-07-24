@@ -67,17 +67,17 @@ class Key{
 
 class Kid{
 	constructor(seed){
-		this.seed = seed;
-		this.gender = (this.seed.in(boy.length + girl.length, nameRange) < boy.length)?"boy":"girl";
+		this.key = seed;
+		this.gender = (this.key.in(boy.length + girl.length, nameRange) < boy.length)?"boy":"girl";
 		if(this.gender == "boy"){ //boy
-			this.firstname = boy[this.seed.in(boy.length + girl.length, nameRange)];
+			this.firstname = boy[this.key.in(boy.length + girl.length, nameRange)];
 		}else if(this.gender == "girl"){ //girl
-			this.firstname = girl[this.seed.in(boy.length + girl.length, nameRange) - boy.length - 1];
+			this.firstname = girl[this.key.in(boy.length + girl.length, nameRange) - boy.length - 1];
 		}
-		this.lastname = lastname[this.seed.in(lastname.length, nameRange)][0];
+		this.lastname = lastname[this.key.in(lastname.length, nameRange)][0];
 		this.name = this.lastname + this.firstname;
 
-		this.birth = new Date(1103932800000 + day * (this.seed.in(360 * 7, nameRange)) );
+		this.birth = new Date(1103932800000 + day * (this.key.in(360 * 7, nameRange)) );
 		var today = new Date();
 		this.age = today.getYear() - this.birth.getYear() + 1;
 		this.grade = grades[this.age-8];
