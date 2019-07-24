@@ -68,12 +68,14 @@ class Key{
 class Kid{
 	constructor(seed){
 		this.key = seed;
+		
 		this.gender = (this.key.in(boy.length + girl.length, nameRange) < boy.length)?"boy":"girl";
 		if(this.gender == "boy"){ //boy
 			this.firstname = boy[this.key.in(boy.length + girl.length, nameRange)];
 		}else if(this.gender == "girl"){ //girl
 			this.firstname = girl[this.key.in(boy.length + girl.length, nameRange) - boy.length - 1];
 		}
+
 		this.lastname = lastname[this.key.in(lastname.length, nameRange)][0];
 		this.name = this.lastname + this.firstname;
 
