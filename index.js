@@ -37,8 +37,8 @@ class Swit{
 class Key{
 	constructor(...swit){
 		this.swits = [...swit];
-		var switSize = 1n;
-		var seedTemp = 0n;
+		var switSize = BigInt(1);
+		var seedTemp = BigInt(0);
 		this.swits.map((data, index) => Object.assign(data, {index})) //Add index to keep order
 		.sort((a,b) => a.range==b.range?0:(a.range>b.range?1:-1)) //Sort by range
 		.forEach(obj => {
@@ -52,7 +52,7 @@ class Key{
 	getSwits(ranges){
 		var sortedRanges = ranges.map((range, index) => ({range: BigInt(range), index}))
 		.sort((a,b) => a.range==b.range?0:(a.range>b.range?1:-1));
-		var switSize = 1n;
+		var switSize = BigInt(1);
 		var out = sortedRanges.map(obj => {
 			obj.swit =(this.seed/switSize)%obj.range;
 			switSize *= obj.range;
