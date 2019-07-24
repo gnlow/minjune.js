@@ -2,21 +2,20 @@ const boy = require("./boy.json");
 const girl = require("./girl.json");
 const lastname = require("./lastname.json");
 
-const nameLength = (boy.length + girl.length) * lastname.length * (360 * 7);
 const nameRange = [boy.length + girl.length, lastname.length, 360 * 7];
 
 const day = 1000 * 60 * 60 * 24;
 
 const grades = [
-{school: "es", grade: 1},
-{school: "es", grade: 2},
-{school: "es", grade: 3},
-{school: "es", grade: 4},
-{school: "es", grade: 5},
-{school: "es", grade: 6},
-{school: "ms", grade: 1},
-{school: "ms", grade: 2},
-{school: "ms", grade: 3},
+	{school: "es", grade: 1},
+	{school: "es", grade: 2},
+	{school: "es", grade: 3},
+	{school: "es", grade: 4},
+	{school: "es", grade: 5},
+	{school: "es", grade: 6},
+	{school: "ms", grade: 1},
+	{school: "ms", grade: 2},
+	{school: "ms", grade: 3},
 ];
 
 let random = (max) => Math.trunc((max * Math.random())); //Generate random integer
@@ -40,18 +39,18 @@ class Key{
 		var switSize = BigInt(1);
 		var seedTemp = BigInt(0);
 		this.swits.map((data, index) => Object.assign(data, {index})) //Add index to keep order
-		.sort((a,b) => a.range==b.range?0:(a.range>b.range?1:-1)) //Sort by range
-		.forEach(obj => {
-			seedTemp += obj.value * switSize;
-			switSize *= obj.range;
-		});
+			.sort((a,b) => a.range==b.range?0:(a.range>b.range?1:-1)) //Sort by range
+			.forEach(obj => {
+				seedTemp += obj.value * switSize;
+				switSize *= obj.range;
+			});
 		this.swits.sort((a,b) => a.index==b.index?0:(a.index>b.index?1:-1)) //Sort by index
-		.map(obj => delete obj.index); //Delete index
+			.map(obj => delete obj.index); //Delete index
 		this.seed = seedTemp;
 	}
 	getSwits(ranges){
 		var sortedRanges = ranges.map((range, index) => ({range: BigInt(range), index}))
-		.sort((a,b) => a.range==b.range?0:(a.range>b.range?1:-1));
+			.sort((a,b) => a.range==b.range?0:(a.range>b.range?1:-1));
 		var switSize = BigInt(1);
 		var out = sortedRanges.map(obj => {
 			obj.swit =(this.seed/switSize)%obj.range;
@@ -59,7 +58,7 @@ class Key{
 			return Object.assign(new Swit(obj.swit, obj.range), {index: obj.index});
 		});
 		return out.sort((a,b) => a.index==b.index?0:(a.index>b.index?1:-1))
-		.map(obj => {delete obj.index;return obj});
+			.map(obj => {delete obj.index;return obj;});
 	}
 	in(range, ranges){
 		return Number(this.getSwits(ranges).find(swit => swit.range == BigInt(range)).value);
@@ -75,7 +74,6 @@ class Kid{
 		}else if(this.gender == "girl"){ //girl
 			this.firstname = girl[this.seed.in(boy.length + girl.length, nameRange) - boy.length - 1];
 		}
-		console.log(this.seed.in(lastname.length, nameRange))
 		this.lastname = lastname[this.seed.in(lastname.length, nameRange)][0];
 		this.name = this.lastname + this.firstname;
 
