@@ -1,9 +1,9 @@
 ---
 name: New random property
 about: Suggest an idea for this project
-title: ''
-labels: ''
-assignees: ''
+title: "[NEW PROP]"
+labels: enhancement
+assignees: entrydark
 
 ---
 
