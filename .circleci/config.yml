@@ -1,6 +1,7 @@
 version: 2
 jobs:
   build:
+    working_directory: ~/minjune.js
     docker:
       - image: circleci/node:12.7
       steps: 
