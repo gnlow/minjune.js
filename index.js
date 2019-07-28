@@ -86,6 +86,4 @@ class Kid{
 	}
 }
 
-var seed = new Key(...Swit.randByRanges(nameRange));
-var a = new Kid(seed);
-console.log(a);
+module.exports = {Swit, Key, Kid, nameRange};
